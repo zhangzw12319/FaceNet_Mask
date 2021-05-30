@@ -2,6 +2,8 @@ import argparse
 import logging
 import os
 import time
+# os.environ['LD_LIBRARY_PATH'] = "/media/zhizhong.zhang/project/zzw"
+# print(os.environ['LD_LIBRARY_PATH'])
 
 import torch
 import torch.distributed as dist
@@ -20,6 +22,7 @@ from utils.utils_logging import AverageMeter, init_logging
 
 
 def main(args):
+    os.environ["CUDA_CUDA_VISIBLE_DEVICES"]="0,1,2,3"
     try:
         world_size = int(os.environ['WORLD_SIZE'])
         rank = int(os.environ['RANK'])
