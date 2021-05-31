@@ -2,8 +2,6 @@ import argparse
 import logging
 import os
 import time
-# os.environ['LD_LIBRARY_PATH'] = "/media/zhizhong.zhang/project/zzw"
-# print(os.environ['LD_LIBRARY_PATH'])
 
 import torch
 import torch.distributed as dist
@@ -135,7 +133,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='PyTorch ArcFace Training')
     # 这个参数是torch.distributed.launch传递过来的，我们设置位置参数来接受，local_rank代表当前程序进程使用的GPU标号
     parser.add_argument('--local_rank', type=int, default=0, help='local_rank')
-    parser.add_argument('--network', type=str, default='r50', help='backbone network')
+    parser.add_argument('--network', type=str, default='r100', help='backbone network')
     parser.add_argument('--loss', type=str, default='arcface', help='loss function')
     parser.add_argument('--resume', type=int, default=0, help='model resuming')
     args_ = parser.parse_args()

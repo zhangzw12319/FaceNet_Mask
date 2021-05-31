@@ -85,7 +85,7 @@ class MXFaceDataset(Dataset):
         s = self.imgrec.read_idx(0)
         header, _ = mx.recordio.unpack(s)
         if header.flag > 0:
-            self.header0 = (int(header.label[0]), int(header.label[1]))
+            self.header0 = (int(header.label[0]), int(header.label[1])) # label[0]是图片总量
             self.imgidx = np.array(range(1, int(header.label[0])))
         else:
             self.imgidx = np.array(list(self.imgrec.keys))
