@@ -25,8 +25,8 @@ if config.dataset == "emore":
     config.lr_func = lr_step_func
 
 elif config.dataset == "ms1m-retinaface-t1":
-    # config.rec = "/train_tmp/ms1m-retinaface-t1"
-    config.rec = "/home/zzz/pytorch/zzw/data/ms1m-retinaface-t1"
+    # config.rec = "/home/zzz/pytorch/zzw/data/ms1m-retinaface-t1/"
+    config.rec = "/home/zzz/pytorch/zzw/data/ms1m-retinaface-t1/divided/"
     config.num_classes = 93431
     config.num_image = 5179510
     config.num_epoch = 25

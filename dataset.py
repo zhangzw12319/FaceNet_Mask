@@ -79,15 +79,24 @@ class MXFaceDataset(Dataset):
              ])
         self.root_dir = root_dir
         self.local_rank = local_rank
-        path_imgrec = os.path.join(root_dir, 'train.rec')
-        path_imgidx = os.path.join(root_dir, 'train.idx')
+        # demo 1.2M data
+        path_imgrec = os.path.join(root_dir, 'train_all.rec')
+        path_imgidx = os.path.join(root_dir, 'train_all.idx')
+
+        # overall 500M data
+        # path_imgrec = os.path.join(root_dir, 'train.rec')
+        # path_imgidx = os.path.join(root_dir, 'train.idx')
+
         self.imgrec = mx.recordio.MXIndexedRecordIO(path_imgidx, path_imgrec, 'r')
-        s = self.imgrec.read_idx(0)
-        header, _ = mx.recordio.unpack(s)
-        if header.flag > 0:
-            self.header0 = (int(header.label[0]), int(header.label[1])) # label[0]是图片总量
-            self.imgidx = np.array(range(1, int(header.label[0])))
-        else:
+        try:
+            s = self.imgrec.read_idx(0)
+            header, _ = mx.recordio.unpack(s)
+            if header.flag > 0:
+                self.header0 = (int(header.label[0]), int(header.label[1])) # label[0]是图片总量
+                self.imgidx = np.array(range(1, int(header.label[0])))
+            else:
+                self.imgidx = np.array(list(self.imgrec.keys))
+        except:
             self.imgidx = np.array(list(self.imgrec.keys))
 
     def __getitem__(self, index):
